@@ -1,24 +1,19 @@
 import logo from './logo.svg';
-import './App.css';
 
+// order is important for overriding.
+import './App.css';
+import "bootstrap/dist/css/bootstrap.css";
+import './index.css';
+
+import Home from "./components/Home";
+import UserProvider from "./providers/UserProvider";
+import Navigation from "./components/Navigation";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserProvider>
+      <Navigation />
+      <Home/>
+    </UserProvider>
   );
 }
 

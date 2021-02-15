@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import App from './App'; // css styles from here will over ride the ./index.css file.
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
