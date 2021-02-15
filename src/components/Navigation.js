@@ -1,31 +1,30 @@
 import { useContext } from "react";
 import { userContext } from "../providers/UserProvider";
-
+import { FaUsers } from "react-icons/fa";
+import { Link } from "react-router-dom";
 export default function Navigation()
 {
     const user = useContext(userContext);
-    alert(user);
-
     return (
             <nav className="site-nav family-sans navbar navbar-expand bg-primary navbar-dark higher">
                 <div className="container-fluid">
                     
-                    <a href="/" className="navbar-brand">
-                        Meeting Log
-                    </a>
+                    <Link to="/" className="navbar-brand">
+                        <FaUsers/> Meeting Log
+                    </Link>
 
                     <div className="navbar-nav ml-auto">
                     
                     {
                         !user && (
                         <>
-                            <a className="nav-item nav-link" href="/login">
+                            <Link className="nav-item nav-link" to="/signin">
                                 log in
-                            </a>
+                            </Link>
                             
-                            <a className="nav-item nav-link" href="/register">
+                            <Link className="nav-item nav-link" to="/signup">
                                 register
-                            </a>
+                            </Link>
                          </>
                         )
                     }
@@ -33,13 +32,13 @@ export default function Navigation()
                     {//** conditional rendering */
                         user && 
                         <>
-                            <a className="nav-item nav-link" href="/meetings">
+                            <Link className="nav-item nav-link" to="/meetings">
                                     meetings
-                            </a>
+                            </Link>
                             
-                            <a className="nav-item nav-link" href="/login">
+                            <Link className="nav-item nav-link" to="/signin">
                                 log out
-                            </a>
+                            </Link>
                         </>
                     }
 

@@ -1,5 +1,6 @@
 import {  Component, useContext} from "react";
- import {  userContext } from "../providers/UserProvider";
+import {  userContext } from "../providers/UserProvider";
+import { Link } from "react-router-dom";
 
 export default function Home(){
 
@@ -26,19 +27,19 @@ export default function Home(){
             {
                 !user && 
                 <>
-                    <a href="/register" className="btn btn-outline-primary mr-2">
+                    <Link to="/signup" className="btn btn-outline-primary mr-2">
                         Register
-                    </a>
-                    <a href="/login" className="btn btn-outline-primary mr-2">
+                    </Link>
+                    <Link to="/signin" className="btn btn-outline-primary mr-2">
                         Log In
-                    </a>
+                    </Link>
                 </>
             }
             {
                 user && 
-                <a href="/meetings" className="btn btn-primary">
+                <Link to="/meetings" className="btn btn-primary">
                 Meetings
-                </a>
+                </Link>
             }
 
             </div> 

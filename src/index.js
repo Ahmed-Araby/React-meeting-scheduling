@@ -3,10 +3,18 @@ import ReactDOM from 'react-dom';
 import App from './App'; // css styles from here will over ride the ./index.css file.
 import reportWebVitals from './reportWebVitals';
 
+
+import { BrowserRouter} from "react-router-dom";
+
+
+
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter> {/** this have to be the root  */}
+    <React.StrictMode>
     <App />
-  </React.StrictMode>,
+    </React.StrictMode>    
+  </BrowserRouter>
+  ,
   document.getElementById('root')
 );
 
