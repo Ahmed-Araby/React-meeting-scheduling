@@ -12,7 +12,9 @@ import UserProvider from "./providers/UserProvider";
 import Navigation from "./components/Navigation";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import "./firebase/firebase";
+
+import firebase from "./firebase/firebase";
+
 function App() {
   return (
      <UserProvider>
