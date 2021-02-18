@@ -2,11 +2,13 @@ import { useState } from "react";
 import { userContext } from "../providers/UserProvider";
 import {EmailPassSignIn} from "../firebase/auth/EmailPassAuth";
 import {getUserData,StoreUserData }from "../firebase/storge/RealTimeDB";
+import { useHistory } from "react-router-dom";
 
 export default function SignIn(params) 
 {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
+    let history = useHistory();
 
     function onInputChangee(e)
     {
@@ -22,7 +24,11 @@ export default function SignIn(params)
     function submitForm(e)
     {
         e.preventDefault();
-        EmailPassSignIn(email, pass);
+        EmailPassSignIn(email, pass)
+        .then(()=>{
+          console.log("here history");
+          history.push('/');
+        });
         return ;
     }
 

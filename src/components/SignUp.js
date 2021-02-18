@@ -2,12 +2,16 @@ import { useState } from "react";
 import { userContext } from "../providers/UserProvider";
 import {EmailPassSignUp} from "../firebase/auth/EmailPassAuth";
 import {getUserData, StoreUserData} from "../firebase/storge/RealTimeDB";
+
+import { useHistory } from "react-router-dom";
+
 export default function SignUp(params) 
 {
     const [dispName, setDispName] = useState("");
     const [email, setEmail] = useState("");
     const [pass1, setPass1] = useState("");
     const [pass2, setPass2] = useState("");
+    const histroy = useHistory();
 
     function onInputChangee(e)
     {
@@ -38,6 +42,7 @@ export default function SignUp(params)
             StoreUserData({"displayName":dispName,
                             "email":email,
                           "uid":uid});
+            histroy.push('/login')          
         })
         return ;
     }

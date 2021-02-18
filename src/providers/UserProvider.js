@@ -45,8 +45,7 @@ export default class UserProvider extends Component{
         .then(()=>{
             console.log("sign out");
             this.setState({"user":null});
-            // redirect here;
-            
+
         })
     }
 

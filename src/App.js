@@ -6,39 +6,62 @@ import "bootstrap/dist/css/bootstrap.css";
 import './index.css';
 
 import { Route, Switch} from "react-router-dom";
-
+import {  useCallback, useContext} from "react";
 import Home from "./components/Home";
-import UserProvider from "./providers/UserProvider";
+import UserProvider, { userContext } from "./providers/UserProvider";
 import Navigation from "./components/Navigation";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-
+import Meetings from "./components/Meetings";
 import firebase from "./firebase/firebase";
 
 function App() {
+  //** now app subscrip tot he userContext */
+  const user = useContext(userContext);
+
   return (
-     <UserProvider>
+      <>
         <Navigation />
 
-        <Switch> 
-          {/** once it will render a Comonent
-          it will go out */}
+        {
+          user.data?
+          <Switch>
+            <Route exact path='/'>
+            <Home/> </Route>
 
-          <Route exact path='/'>
-          <Home/> </Route>
+            <Route exact path='/meetings'>
+            <Meetings/> </Route>
 
-          <Route path='/signin'>
-            <SignIn/>
-          </Route>
+            <Route><Home/></Route>
 
-          <Route path='/signup'>
-            <SignUp/>
-          </Route>
+          </Switch>
+          :
+          null
+        }
 
-          <Route>not implemented yet</Route>
+        {
+            !user.data?
+          <Switch> 
+            {/** once it will render a Comonent
+            it will go out */}
 
-        </Switch>
-      </UserProvider>
+            
+
+            <Route path='/signin'>
+              <SignIn/>
+            </Route>
+
+            <Route path='/signup'>
+              <SignUp/>
+            </Route>
+
+            <Route> <SignIn/> </Route>
+
+          </Switch>
+          :
+          null
+        }
+      </>
    );
 }
 
