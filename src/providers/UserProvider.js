@@ -1,7 +1,9 @@
 import {  Component, createContext } from "react";
 import { firebaseAuth } from "../firebase/firebase";
-export const userContext = createContext(null);
+import { getUserData }from "../firebase/storge/RealTimeDB";
+import { EmailPassSignOut } from "../firebase/auth/EmailPassAuth";
 
+export const userContext = createContext(null);
 export default class UserProvider extends Component{
 
     constructor(props){
@@ -10,6 +12,7 @@ export default class UserProvider extends Component{
             "user":null
         }
     }
+    
     componentDidMount(){
         /**
          * this function listen to sign up
@@ -17,12 +20,39 @@ export default class UserProvider extends Component{
          */
         firebaseAuth.onAuthStateChanged((userCred)=>{
             console.log("auth change");
-            let uid = userCred.uid;
-            // read data from the data base
+            if(userCred){
+                let uid = userCred.uid;
+                getUserData(uid)
+                .then((snapshot)=>{
+                    if(snapshot.exists()){
+                        let userData  = snapshot.val();
+                        console.log("user data is ", userData);
+                        this.setState({"user":userData});
+                    }
+                    else{
+                        console.log("there is no data ")
+                    }
+                });
+                
+            }
         })
     }
+
+    signOut = (e)=>
+    {
+        e.preventDefault();
+        EmailPassSignOut()
+        .then(()=>{
+            console.log("sign out");
+            this.setState({"user":null});
+            // redirect here;
+            
+        })
+    }
+
     render(){
-        return <userContext.Provider value={this.state.user}> 
+        return <userContext.Provider value={{"data":this.state.user,
+                                             "signOut":this.signOut}}> 
             {this.props.children}
         </userContext.Provider>
     }

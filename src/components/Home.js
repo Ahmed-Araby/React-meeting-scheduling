@@ -23,9 +23,15 @@ export default function Home(){
                 way to learn <a href="https://reactjs.org/">React</a> 
                 {' '}with <a href="https://firebase.google.com">Firebase</a>.
             </p>
-        
+
             {
-                !user && 
+                /** we can render a nother component to controll
+                the display more freely. */
+                user.data? "hellow " + user.data.dispName : null
+            }
+
+            {
+                !user.data && 
                 <>
                     <Link to="/signup" className="btn btn-outline-primary mr-2">
                         Register
@@ -36,7 +42,7 @@ export default function Home(){
                 </>
             }
             {
-                user && 
+                user.data && 
                 <Link to="/meetings" className="btn btn-primary">
                 Meetings
                 </Link>
