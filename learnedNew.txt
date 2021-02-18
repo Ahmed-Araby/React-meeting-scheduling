@@ -1,0 +1,9 @@
+1- setState can take call back function alone 
+2- ----------------- ------------------------ and
+    the new data as 2 seprate arguments
+
+3- if there is no 
+
+
+Questions:
+1- not let in async fnction produce not defined error
