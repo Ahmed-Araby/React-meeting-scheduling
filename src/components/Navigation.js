@@ -2,9 +2,21 @@ import { useContext } from "react";
 import { userContext } from "../providers/UserProvider";
 import { FaUsers } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { EmailPassSignOut } from "../firebase/auth/EmailPassAuth";
 export default function Navigation()
 {
     const user = useContext(userContext);
+
+    function signOut(e) 
+    {
+        e.preventDefault();
+        EmailPassSignOut()
+        .then(
+            // redirect here;
+            console.log("sign out")
+        )
+        
+    }
     return (
             <nav className="site-nav family-sans navbar navbar-expand bg-primary navbar-dark higher">
                 <div className="container-fluid">
@@ -36,9 +48,10 @@ export default function Navigation()
                                     meetings
                             </Link>
                             
-                            <Link className="nav-item nav-link" to="/signin">
+                            <a className="nav-item nav-link" href="/signin"
+                                onClick={signOut}>
                                 log out
-                            </Link>
+                            </a>
                         </>
                     }
 

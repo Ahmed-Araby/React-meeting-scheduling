@@ -7,3 +7,4 @@
 
 Questions:
 1- not let in async fnction produce not defined error
+2- how to handle fail in async ans await.

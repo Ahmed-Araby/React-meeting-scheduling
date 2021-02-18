@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { userContext } from "../providers/UserProvider";
-import EmailPassSignUp from "../firebase/auth/EmailPassSignUp";
+import {EmailPassSignUp} from "../firebase/auth/EmailPassAuth";
 import StoreUserData from "../firebase/RealTimeDB/StoreUserData";
 export default function SignUp(params) 
 {
