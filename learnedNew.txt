@@ -3,7 +3,8 @@
     the new data as 2 seprate arguments
 
 3- if there is no 
-
+4- redirect is a component so we need to use it in render function or
+in the return of a functional component.
 
 Questions:
 1- not let in async fnction produce not defined error
