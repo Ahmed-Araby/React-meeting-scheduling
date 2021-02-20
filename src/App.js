@@ -14,6 +14,24 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Meetings from "./components/Meetings";
 import firebase from "./firebase/firebase";
+import CheckIn from "./components/CheckIn";
+import { useRouteMatch } from "react-router-dom";
+
+function New(params) {
+  /**
+   * this is how U can get here 
+   * <Route path='/new/:name/:age'><New/></Route>
+   */
+  let match = useRouteMatch();
+  console.log(match)
+
+  return (
+    <>
+    this is new 
+    <h1>here : {match.params.name} -- {match.params.age}</h1>
+    </>
+  )
+}
 
 function App() {
   //** now app subscrip tot he userContext */
@@ -32,6 +50,9 @@ function App() {
             <Route exact path='/meetings'>
             <Meetings/> </Route>
 
+            <Route path='/checkin/:meetingId'> 
+            <CheckIn/> </Route>
+            
             <Route><Home/></Route>
 
           </Switch>
