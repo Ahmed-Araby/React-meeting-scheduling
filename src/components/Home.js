@@ -27,11 +27,11 @@ export default function Home(){
             {
                 /** we can render a nother component to controll
                 the display more freely. */
-                user.data? "hellow " + user.data.dispName : null
+                user? "hellow " + user.dispName : null
             }
 
             {
-                !user.data && 
+                !user && 
                 <>
                     <Link to="/signup" className="btn btn-outline-primary mr-2">
                         Register
@@ -42,7 +42,7 @@ export default function Home(){
                 </>
             }
             {
-                user.data && 
+                user && 
                 <Link to="/meetings" className="btn btn-primary">
                 Meetings
                 </Link>

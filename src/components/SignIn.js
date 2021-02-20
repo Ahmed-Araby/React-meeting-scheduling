@@ -26,8 +26,7 @@ export default function SignIn(params)
         e.preventDefault();
         EmailPassSignIn(email, pass)
         .then(()=>{
-          console.log("here history");
-          history.push('/');
+          //history.push('/');
         });
         return ;
     }

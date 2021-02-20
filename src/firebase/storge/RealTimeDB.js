@@ -14,3 +14,23 @@ export async function getUserData(key) {
     let snapshot = await realTimeDB.ref(key).get();
     return Promise.resolve(snapshot);
 }
+
+
+export function saveData(path, data) {
+    let ref = realTimeDB.ref(path); // what if the path did not exist before.
+    let key = ref.push(data).key;
+    console.log("new key os ", key);
+    
+}
+
+export function readData(path, start,orderByKey, limit) {
+    let ref = realTimeDB.ref(path)
+                        .orderByChild(orderByKey)
+                        .startAfter(start)
+                        .limitToFirst(limit);
+    ref.once('value', (snapshot)=>{
+        console.log("snap shot data is ", snapshot.key, snapshot.val());
+    });
+
+    return ;
+}

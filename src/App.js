@@ -24,7 +24,7 @@ function App() {
         <Navigation />
 
         {
-          user.data?
+          user?
           <Switch>
             <Route exact path='/'>
             <Home/> </Route>
@@ -40,7 +40,7 @@ function App() {
         }
 
         {
-            !user.data?
+            !user?
           <Switch> 
             {/** once it will render a Comonent
             it will go out */}

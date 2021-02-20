@@ -1,12 +1,22 @@
+import { Component } from "react";
+import MeetingForm from "./MeetingForm";
+import MeetingList from "./MeetingList";
 
+function getTimeStamp() {
+    return Date.now();
+    
+}
 
-export default function Meetings(params) 
+export default class Meetings extends Component
 {
-    return (
-        <div className='text-center mt-4'>
-            <div className='text-primary'>
-                Meetings
-            </div>
-        </div>
-    );
+    constructor(props){
+        super(props);        
+    }
+
+    render(){
+        return (<>
+            <MeetingForm/>
+            <MeetingList />
+        </>);
+    }
 }

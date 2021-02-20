@@ -1,7 +1,6 @@
 import {  Component, createContext } from "react";
 import { firebaseAuth } from "../firebase/firebase";
 import { getUserData }from "../firebase/storge/RealTimeDB";
-import { EmailPassSignOut } from "../firebase/auth/EmailPassAuth";
 
 export const userContext = createContext(null);
 export default class UserProvider extends Component{
@@ -22,7 +21,7 @@ export default class UserProvider extends Component{
             console.log("auth change");
             if(userCred){
                 let uid = userCred.uid;
-                getUserData(uid)
+                getUserData(uid) // from the real time data base.
                 .then((snapshot)=>{
                     if(snapshot.exists()){
                         let userData  = snapshot.val();
@@ -35,23 +34,15 @@ export default class UserProvider extends Component{
                 });
                 
             }
-        })
-    }
-
-    signOut = (e)=>
-    {
-        e.preventDefault();
-        EmailPassSignOut()
-        .then(()=>{
-            console.log("sign out");
-            this.setState({"user":null});
-
+            else{
+                console.log("user is not signed in")
+                this.setState({"user":null});
+            }
         })
     }
 
     render(){
-        return <userContext.Provider value={{"data":this.state.user,
-                                             "signOut":this.signOut}}> 
+        return <userContext.Provider value={this.state.user}> 
             {this.props.children}
         </userContext.Provider>
     }
