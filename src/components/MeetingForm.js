@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { saveData } from "../firebase/storge/RealTimeDB";
+import {userContext} from "../providers/UserProvider";
 
 function getTimeStamp() {
     return Date.now();
@@ -7,6 +8,8 @@ function getTimeStamp() {
 }
 export default class MeetingForm extends Component
 {
+    static contextType = userContext;
+
     constructor(props)
     {
         super(props);
@@ -29,9 +32,9 @@ export default class MeetingForm extends Component
     {
         e.preventDefault();
         let data = {"meetingName":this.state.meetingName, "createAt":getTimeStamp()};
-        console.log("meeting to be saved : ", data);
         // save the meeting.
-        saveData('meetings', data);
+        let path = "meetings/" + this.context.uid;
+        saveData(path, data);
     }
 
     render(){

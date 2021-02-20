@@ -18,26 +18,22 @@ export default class UserProvider extends Component{
          * and sign in.
          */
         firebaseAuth.onAuthStateChanged((userCred)=>{
-            console.log("auth change");
+            console.log("auth changes");
             if(userCred){
                 let uid = userCred.uid;
                 getUserData(uid) // from the real time data base.
                 .then((snapshot)=>{
                     if(snapshot.exists()){
                         let userData  = snapshot.val();
-                        console.log("user data is ", userData);
-                        this.setState({"user":userData});
+                        this.setState({"user":{...userData, "uid":uid}});
                     }
                     else{
                         console.log("there is no data ")
                     }
                 });
-                
             }
-            else{
-                console.log("user is not signed in")
+            else
                 this.setState({"user":null});
-            }
         })
     }
 

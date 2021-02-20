@@ -19,7 +19,7 @@ export async function getUserData(key) {
 export function saveData(path, data) {
     let ref = realTimeDB.ref(path); // what if the path did not exist before.
     let key = ref.push(data).key;  // key is generated locally, using the cur time stamp.
-    console.log("new key os ", key);
+    //console.log("new key os ", key);
     
 }
 

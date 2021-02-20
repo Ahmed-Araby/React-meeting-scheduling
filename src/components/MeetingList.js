@@ -1,6 +1,7 @@
 import { Component, createContext } from "react";
 import { readData } from "../firebase/storge/RealTimeDB";
 import {  deleteData, updateDate } from "../firebase/storge/RealTimeDB";
+import {userContext} from "../providers/UserProvider";
 
 function Meeting(params) {
     return (
@@ -24,6 +25,8 @@ function Meeting(params) {
 
 export default class MeetingList extends Component
 {
+    static contextType = userContext;
+
     constructor(props)
     {
         super(props);
@@ -34,8 +37,9 @@ export default class MeetingList extends Component
     
     componentDidMount() {
         /**what if I used "this" here !!!??? */
-        readData('meetings', 'a', 'meetingName', 10, this.getMeetings);
-        updateDate("meetings/1",  {"meetingName":"play football2"});
+        let path = "meetings/" + this.context.uid;
+        readData(path, 'a', 'meetingName', 10, this.getMeetings);
+        //updateDate("meetings/1",  {"meetingName":"play football2"});
     }
 
     getMeetings = (snapshot)=>{
@@ -48,7 +52,8 @@ export default class MeetingList extends Component
     }
 
     deleteMeeting = (e, key) => {
-        let prom = deleteData("meetings/"+key);
+        let path = "meetings/" + this.context.uid;
+        let prom = deleteData(path+key);
         return ;
     }
 

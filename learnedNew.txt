@@ -10,6 +10,8 @@ in the return of a functional component.
 https://stackoverflow.com/questions/33893866/orderbychild-not-working-in-firebase
 
 6- how does memory leeks happens in js and react.
+
+7- some of the undefined issues comes from import some thing as if it was the default export.
 Questions:
 1- not let in async fnction produce not defined error
 2- how to handle fail in async ans await.   
