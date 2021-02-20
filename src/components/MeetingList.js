@@ -5,12 +5,19 @@ import {  deleteData, updateDate } from "../firebase/storge/RealTimeDB";
 function Meeting(params) {
     return (
         <>
-            <span> meeting : {params.meetingName}.</span>   {" "}
-            <span>crated at : {(new Date(params.createAt)).toUTCString()}</span>
-            <button onClick={(e)=>{
-                params.deleteMeeting(e, params.meetingKey);
-            }} >delete</button>
-            <br></br>
+            <li className="list-group-item">
+
+                <span> meeting : {params.meetingName}.</span>   {" "}
+                <span>crated at : {(new Date(params.createAt)).toUTCString()}</span>
+
+                <div className="bg-light clearfix">
+                    <button onClick={(e)=>{
+                        params.deleteMeeting(e, params.meetingKey);
+                        }}
+                        type="button"
+                        className="btn btn-danger float-right">Delete</button>
+                </div>
+            </li>
         </>
     )
 }
@@ -48,10 +55,10 @@ export default class MeetingList extends Component
     render()
     {
         return (
-            <ul>
+            <ul className="list-group meeting_list">
                 {
                     this.state.meetings.map(({key, meeting})=>{
-                         
+                        
                         return (<Meeting key={key}
                                         meetingKey={key}
                                         meetingName={meeting.meetingName}
@@ -62,6 +69,6 @@ export default class MeetingList extends Component
                     })
                 }
             </ul>
-        );
+        )
     }
 }
