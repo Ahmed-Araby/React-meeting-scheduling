@@ -18,19 +18,32 @@ export async function getUserData(key) {
 
 export function saveData(path, data) {
     let ref = realTimeDB.ref(path); // what if the path did not exist before.
-    let key = ref.push(data).key;
+    let key = ref.push(data).key;  // key is generated locally, using the cur time stamp.
     console.log("new key os ", key);
     
 }
 
-export function readData(path, start,orderByKey, limit) {
+export async function readData(path, start, orderByKey, limit, getMeetings)
+{
     let ref = realTimeDB.ref(path)
                         .orderByChild(orderByKey)
+                        // for pagination
                         .startAfter(start)
                         .limitToFirst(limit);
-    ref.once('value', (snapshot)=>{
-        console.log("snap shot data is ", snapshot.key, snapshot.val());
-    });
+                        
+    ref.on('value', getMeetings);
+}
 
-    return ;
+
+export function deleteData(path) {
+    let ref = realTimeDB.ref(path);
+    let prom = ref.remove();
+    return prom;
+}
+
+
+export function updateDate(path, newDate) {
+    let ref = realTimeDB.ref(path);
+    // it will only update the specified keys
+    ref.update(newDate);
 }

@@ -6,6 +6,10 @@
 4- redirect is a component so we need to use it in render function or
 in the return of a functional component.
 
+5- how to use orderbyChild in firebase js: 
+https://stackoverflow.com/questions/33893866/orderbychild-not-working-in-firebase
+
+6- how does memory leeks happens in js and react.
 Questions:
 1- not let in async fnction produce not defined error
 2- how to handle fail in async ans await.   
