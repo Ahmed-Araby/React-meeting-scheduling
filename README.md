@@ -19,3 +19,9 @@
 ## screen shoots from the App
 * main screen (add and display meetings)
     * ![add_display_meetings](https://github.com/Ahmed-Araby/React-SPA/blob/master/add_meeting.png)
+
+* add attende to the meeting
+    * ![add attende to the meeting](https://github.com/Ahmed-Araby/React-SPA/blob/master/check_in_attende.png)
+
+* display list of attendes of a specific meeting
+    * ![add attende to the meeting](https://github.com/Ahmed-Araby/React-SPA/blob/master/list_of_attendes.png)
