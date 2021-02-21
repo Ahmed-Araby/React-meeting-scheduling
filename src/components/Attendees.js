@@ -1,6 +1,6 @@
 import {  useContext,Component } from "react";
 import {  userContext } from "../providers/UserProvider";
-import {  readData, deleteData } from "../firebase/storge/RealTimeDB";
+import {  readData, deleteData , removeListner} from "../firebase/storge/RealTimeDB";
 
 function OneAttende(params) 
 {
@@ -59,10 +59,30 @@ export default class Attendees extends Component
     componentDidMount()
     {
         let path = "meetings/" + this.context.uid + "/" +  this.meetindId + "/attendees";
-        console.log("path is ", path);
-        readData(path, 'a', 'email', 10, this.populateAttendes);
+        console.log("attendes path is ", path);
+        
+        let prom= readData(path, 'a', 'email', 10, this.populateAttendes, 'value');
+        prom
+        .then(({listener, ref})=>{
+            this.attendeesListener = {
+                "listener":listener,
+                "ref":ref,
+                "event":'value'
+            };
+        });
+        return ;
+    
     }
 
+    componentWillUnmount()
+    {
+        let listener = this.attendeesListener.listener;
+        let ref = this.attendeesListener.ref;
+        let event = this.attendeesListener.event;
+        removeListner(listener, ref, event);
+        return ;
+    }
+    
     render()
     {
         console.log(this.state.attendees);

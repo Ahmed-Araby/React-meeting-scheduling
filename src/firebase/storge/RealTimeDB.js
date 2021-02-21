@@ -24,7 +24,7 @@ export function saveData(path, data) {
     
 }
 
-export async function readData(path, start, orderByKey, limit, callback)
+export async function readData(path, start, orderByKey, limit, callback, listenEvent='value')
 {
     let ref = realTimeDB.ref(path)
                         .orderByChild(orderByKey)
@@ -32,7 +32,8 @@ export async function readData(path, start, orderByKey, limit, callback)
                         .startAfter(start)
                         .limitToFirst(limit);
                         
-    ref.on('value', callback);
+    let listener = ref.on(listenEvent, callback);
+    return {listener, ref};
 }
 
 
@@ -60,4 +61,10 @@ export async function isNotExist(path, orderByProp, equalToProp)
     if(snapshot.exists() == false)
         return  Promise.resolve();  // return true;
     return Promise.reject("data exist");  // return false;
+}
+
+
+export function removeListner(listner, ref, event) {
+    ref.off(event, listner);
+    return ;
 }

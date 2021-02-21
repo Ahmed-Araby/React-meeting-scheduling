@@ -1,6 +1,6 @@
 import { Component, createContext } from "react";
 import { readData } from "../firebase/storge/RealTimeDB";
-import {  deleteData, updateDate } from "../firebase/storge/RealTimeDB";
+import {  deleteData, updateDate, removeListner} from "../firebase/storge/RealTimeDB";
 import {userContext} from "../providers/UserProvider";
 import { useHistory } from "react-router-dom";
 
@@ -61,8 +61,17 @@ export default class MeetingList extends Component
     componentDidMount() {
         /**what if I used "this" here !!!??? */
         let path = "meetings/" + this.context.uid;
-        readData(path, 'a', 'meetingName', 10, this.getMeetings);
-        //updateDate("meetings/1",  {"meetingName":"play football2"});
+        let prom = readData(path, 'a', 'meetingName', 10, this.getMeetings, 'value');
+        
+        prom
+        .then(({listener, ref})=>{
+            this.meetingListListner = {
+                "listener":listener,
+                "ref":ref,
+                "event":'value'
+            };
+        });
+        return ;
     }
 
     getMeetings = (snapshot)=>{
@@ -77,6 +86,17 @@ export default class MeetingList extends Component
     deleteMeeting = (e, key) => {
         let path = "meetings/" + this.context.uid + "/" + key;
         let prom = deleteData(path);
+        return ;
+    }
+
+    componentWillUnmount()
+    {
+        console.log("un mount attendes")
+        let listener = this.meetingListListner.listener;
+        let ref = this.meetingListListner.ref;
+        let event = this.meetingListListner.event;
+        removeListner(listener, ref, event);
+        
         return ;
     }
 
