@@ -10,7 +10,7 @@ import {  useRouteMatch } from "react-router-dom";
 import {  useState , useContext} from "react";
 import {  userContext } from "../providers/UserProvider";
 import { saveData } from "../firebase/storge/RealTimeDB";
-
+import {  isExist } from "../firebase/storge/RealTimeDB";
 export default function CheckIn()
 {
     let match = useRouteMatch();
@@ -33,10 +33,23 @@ export default function CheckIn()
     function handleSubmit(e) {
         e.preventDefault();
         let data = {"name":name, "email":email};
-        let path = "meetings/" + user.uid + "/" + match.params.meetingId + "/attendees";
+        let path = "meetings/" + user.uid + "/" + match.params.meetingId + "/attendees/";
         console.log(path);
-        saveData(path, data);
-        return ;
+        
+        let notExist = isExist(path, "email", email);
+        notExist
+        .then(()=>{
+            // data dont exist
+            // insertion depends on the data being not exist before.
+            console.log("successful insertion ");
+            saveData(path, data);
+            setName("");
+            setEmail("");
+        })
+        .catch((err)=>{
+            // data exist
+            console.log(err);
+        })
     }
 
     return (

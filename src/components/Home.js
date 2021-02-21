@@ -27,7 +27,7 @@ export default function Home(){
             {
                 /** we can render a nother component to controll
                 the display more freely. */
-                user? "hellow " + user.dispName : null
+                user? ( <> {"hellow " + user.dispName} <br></br> </>): null
             }
 
             {

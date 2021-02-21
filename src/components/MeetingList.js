@@ -2,8 +2,12 @@ import { Component, createContext } from "react";
 import { readData } from "../firebase/storge/RealTimeDB";
 import {  deleteData, updateDate } from "../firebase/storge/RealTimeDB";
 import {userContext} from "../providers/UserProvider";
+import { useHistory } from "react-router-dom";
 
 function Meeting(params) {
+    /** single meeting info */
+    const history = useHistory();
+
     return (
         <>
             <li className="list-group-item">
@@ -12,6 +16,15 @@ function Meeting(params) {
                 <span>crated at : {(new Date(params.createAt)).toUTCString()}</span>
 
                 <div className="bg-light clearfix">
+                    
+                    <button onClick={(e)=>{ 
+                            let url = `/checkin/${params.meetingKey}`
+                            history.push(url);}}
+
+                        type="button"
+                        className="btn btn-primary float-right">Add Attende</button>
+                        
+
                     <button onClick={(e)=>{
                         params.deleteMeeting(e, params.meetingKey);
                         }}
