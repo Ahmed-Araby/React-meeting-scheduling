@@ -18,4 +18,4 @@
 
 ## screen shoots from the App
 * main screen (add and display meetings)
-    * [ [!add_display_meetings](https://github.com/Ahmed-Araby/React-SPA/blob/master/add_meeting.png)]
+    * ![add_display_meetings](https://github.com/Ahmed-Araby/React-SPA/blob/master/add_meeting.png)
