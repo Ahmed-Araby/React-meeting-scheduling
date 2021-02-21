@@ -52,8 +52,7 @@ function App() {
             <Route exact path='/meetings'>
             <Meetings/> </Route>
 
-            <Route path='/checkin/:meetingId'> 
-            <CheckIn/> </Route>
+            <Route path='/checkin/:meetingId' component={CheckIn}></Route>
             
             <Route path="/attendees/:meetingId" component={Attendees}></Route>
 

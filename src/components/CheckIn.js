@@ -12,8 +12,9 @@ import {  useState , useContext} from "react";
 import {  userContext } from "../providers/UserProvider";
 import { saveData } from "../firebase/storge/RealTimeDB";
 import {  isNotExist } from "../firebase/storge/RealTimeDB";
+import Attendees from "./Attendees";
 
-export default function CheckIn()
+export default function CheckIn(props)
 {
     let match = useRouteMatch();
     const [name, setName] = useState("");
@@ -55,62 +56,67 @@ export default function CheckIn()
     }
 
     return (
-    <form className="mt-3" onSubmit={handleSubmit}>
-        <div className="container">
-            <div className="row justify-content-center">
-            <div className="col-lg-6">
-                <div className="card bg-light">
-                <div className="card-body">
-                    <h3 className="font-weight-light mb-3">Check in</h3>
-                    <section className="form-group">
-                    <label
-                        className="form-control-label sr-only"
-                        htmlFor="displayName"
-                    >
-                        Name
-                    </label>
-                    <input
-                        required
-                        className="form-control"
-                        type="text"
-                        id="displayName"
-                        name="name"
-                        placeholder="Name"
-                        value={name}
-                        onChange={handleChange}
-                    />
-                    
-                    </section>
-                    <section className="form-group">
-                    <label
-                        className="form-control-label sr-only"
-                        htmlFor="Email"
-                    >
-                        Email
-                    </label>
+    <>
+        <form className="mt-3" onSubmit={handleSubmit}>
+            <div className="container">
+                <div className="row justify-content-center">
+                <div className="col-lg-6">
+                    <div className="card bg-light">
+                    <div className="card-body">
+                        <h3 className="font-weight-light mb-3">Check in</h3>
+                        <section className="form-group">
+                        <label
+                            className="form-control-label sr-only"
+                            htmlFor="displayName"
+                        >
+                            Name
+                        </label>
+                        <input
+                            required
+                            className="form-control"
+                            type="text"
+                            id="displayName"
+                            name="name"
+                            placeholder="Name"
+                            value={name}
+                            onChange={handleChange}
+                        />
+                        
+                        </section>
+                        <section className="form-group">
+                        <label
+                            className="form-control-label sr-only"
+                            htmlFor="Email"
+                        >
+                            Email
+                        </label>
 
-                    <input
-                        required
-                        className="form-control"
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={handleChange}
-                    />
+                        <input
+                            required
+                            className="form-control"
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={handleChange}
+                        />
 
-                    </section>
-                    <div className="form-group text-right mb-0">
-                    <button className="btn btn-primary" type="submit">
-                        Check in
-                    </button>
+                        </section>
+                        <div className="form-group text-right mb-0">
+                        <button className="btn btn-primary" type="submit">
+                            Check in
+                        </button>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 </div>
             </div>
-            </div>
-        </div>
-    </form>
+        </form>
+        <Attendees match={props.match}/>
+
+    </>
+
     )
 }
