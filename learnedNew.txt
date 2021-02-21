@@ -17,6 +17,16 @@ https://stackoverflow.com/questions/33893866/orderbychild-not-working-in-firebas
 
 9- we cant use ; inside js expression in jsx with {}, why !?
 
+10- in firebase we can apply remove on ref not query
+
+11- ref is a position in the tree.
+
+10- filter method create queries not ref.
+
+11- we can get ref to the query location.
+
 Questions:
 1- not let in async fnction produce not defined error
 2- how to handle fail in async ans await.   
+3- delete child of snapshot that have more than one child:
+https://stackoverflow.com/questions/48894936/firebase-database-remove-is-not-a-function
