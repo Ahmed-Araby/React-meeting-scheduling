@@ -1,9 +1,9 @@
 # meeting scheduling react application with Firebase.
 ## technologies used
-* react
-* react-router 
-* firebase realtime database
-* firebase authentication
+* ### react
+* ### react-router 
+* ### firebase realtime database
+* ### firebase authentication
 
 
 ## features:
