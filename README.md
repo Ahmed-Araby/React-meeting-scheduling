@@ -6,7 +6,7 @@
 * ### firebase authentication
 
 
-## features:
+## features
 * ### user authentication (sign in, sign up, sign out) using firebase.
 * ### storing the meetings data using firebase realtime data base.
      * store meeting data per user
@@ -16,3 +16,6 @@
      * display list of meetings per user
      * display list of attendees per meeting
 
+## screen shoots from the App
+* main screen (add and display meetings)
+    * [ [!add_display_meetings](https://github.com/Ahmed-Araby/React-SPA/blob/master/add_meeting.png)]
