@@ -6,11 +6,13 @@
  * will attend this meeting
  * ref = {name, email}
  */
+
 import {  useRouteMatch } from "react-router-dom";
 import {  useState , useContext} from "react";
 import {  userContext } from "../providers/UserProvider";
 import { saveData } from "../firebase/storge/RealTimeDB";
-import {  isExist } from "../firebase/storge/RealTimeDB";
+import {  isNotExist } from "../firebase/storge/RealTimeDB";
+
 export default function CheckIn()
 {
     let match = useRouteMatch();
@@ -36,7 +38,7 @@ export default function CheckIn()
         let path = "meetings/" + user.uid + "/" + match.params.meetingId + "/attendees/";
         console.log(path);
         
-        let notExist = isExist(path, "email", email);
+        let notExist = isNotExist(path, "email", email);
         notExist
         .then(()=>{
             // data dont exist

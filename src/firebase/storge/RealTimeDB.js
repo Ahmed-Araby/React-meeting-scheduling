@@ -1,3 +1,5 @@
+/** firebase realtime data base support transactions */
+
 import {  realTimeDB } from "../firebase";
 
 
@@ -15,7 +17,6 @@ export async function getUserData(key) {
     return Promise.resolve(snapshot);
 }
 
-
 export function saveData(path, data) {
     let ref = realTimeDB.ref(path); // what if the path did not exist before.
     let key = ref.push(data).key;  // key is generated locally, using the cur time stamp.
@@ -23,7 +24,7 @@ export function saveData(path, data) {
     
 }
 
-export async function readData(path, start, orderByKey, limit, getMeetings)
+export async function readData(path, start, orderByKey, limit, callback)
 {
     let ref = realTimeDB.ref(path)
                         .orderByChild(orderByKey)
@@ -31,7 +32,7 @@ export async function readData(path, start, orderByKey, limit, getMeetings)
                         .startAfter(start)
                         .limitToFirst(limit);
                         
-    ref.on('value', getMeetings);
+    ref.on('value', callback);
 }
 
 
@@ -41,9 +42,22 @@ export function deleteData(path) {
     return prom;
 }
 
-
 export function updateDate(path, newDate) {
     let ref = realTimeDB.ref(path);
     // it will only update the specified keys
     ref.update(newDate);
+}
+
+export async function isNotExist(path, orderByProp, equalToProp) 
+{
+    let ref = realTimeDB.ref(path)
+                        .orderByChild(orderByProp)
+                        .equalTo(equalToProp);
+
+    let prom = ref.once('value');
+    let snapshot = await prom;
+
+    if(snapshot.exists() == false)
+        return  Promise.resolve();  // return true;
+    return Promise.reject("data exist");  // return false;
 }
