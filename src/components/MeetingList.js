@@ -16,7 +16,21 @@ function Meeting(params) {
                 <span>crated at : {(new Date(params.createAt)).toUTCString()}</span>
 
                 <div className="bg-light clearfix">
-                    
+
+                    <button onClick={(e)=>{
+                        params.deleteMeeting(e, params.meetingKey);
+                        }}
+                        type="button"
+                        className="btn btn-danger float-right">Delete</button>
+
+                    {" "}
+                    <button onClick={(e)=>{
+                        let url = `/attendees/${params.meetingKey}`;
+                        history.push(url);}}
+                        type="button"
+                        className="btn btn-primary float-right">Attendees List</button>
+
+                    {" "}
                     <button onClick={(e)=>{ 
                             let url = `/checkin/${params.meetingKey}`
                             history.push(url);}}
@@ -25,11 +39,7 @@ function Meeting(params) {
                         className="btn btn-primary float-right">Add Attende</button>
                         
 
-                    <button onClick={(e)=>{
-                        params.deleteMeeting(e, params.meetingKey);
-                        }}
-                        type="button"
-                        className="btn btn-danger float-right">Delete</button>
+                
                 </div>
             </li>
         </>
@@ -65,8 +75,8 @@ export default class MeetingList extends Component
     }
 
     deleteMeeting = (e, key) => {
-        let path = "meetings/" + this.context.uid;
-        let prom = deleteData(path+key);
+        let path = "meetings/" + this.context.uid + "/" + key;
+        let prom = deleteData(path);
         return ;
     }
 

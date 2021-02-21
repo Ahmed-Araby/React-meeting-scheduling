@@ -14,6 +14,9 @@ https://stackoverflow.com/questions/33893866/orderbychild-not-working-in-firebas
 7- some of the undefined issues comes from import some thing as if it was the default export.
 
 8- controlling input with undefined state cuz un controlled inptut warning. 
+
+9- we cant use ; inside js expression in jsx with {}, why !?
+
 Questions:
 1- not let in async fnction produce not defined error
 2- how to handle fail in async ans await.   

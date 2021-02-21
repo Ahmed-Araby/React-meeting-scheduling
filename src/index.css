@@ -2,7 +2,7 @@
     background-color: beige;
   }
 
-  .meeting_list {
+  .meeting_list, .attendees_list {
     text-align: center;
     list-style: inside;
   }

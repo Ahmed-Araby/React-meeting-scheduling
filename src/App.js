@@ -16,6 +16,8 @@ import Meetings from "./components/Meetings";
 import firebase from "./firebase/firebase";
 import CheckIn from "./components/CheckIn";
 import { useRouteMatch } from "react-router-dom";
+import Attendeesfrom  from "./components/Attendees";
+import Attendees from './components/Attendees';
 
 function New(params) {
   /**
@@ -40,10 +42,10 @@ function App() {
   return (
       <>
         <Navigation />
-
+        
         {
           user?
-          <Switch>
+          <Switch>            
             <Route exact path='/'>
             <Home/> </Route>
 
@@ -53,6 +55,8 @@ function App() {
             <Route path='/checkin/:meetingId'> 
             <CheckIn/> </Route>
             
+            <Route path="/attendees/:meetingId" component={Attendees}></Route>
+
             <Route><Home/></Route>
 
           </Switch>
